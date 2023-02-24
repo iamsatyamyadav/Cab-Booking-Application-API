@@ -49,6 +49,10 @@ public class Driver extends AbstractUser{
 	@Embedded
 	private Cab cab;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "driver")
+	private Set<TripBooking> tripBookings = new HashSet<>();
+	
 	public Driver(String userName, String password, String address, String mobileNo, String email, Integer driverId,
 			String licenseNo, Cab cab, Float rating) {
 		super(userName, password, address, mobileNo, email);

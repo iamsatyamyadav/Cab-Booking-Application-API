@@ -12,7 +12,7 @@ public interface DriverDAO extends JpaRepository<Driver, Integer>{
 
 	public Driver findByUserName(String userName);
 	
-	@Query("select new com.cabway.model.DriverValidationDTO(d.userName,d.password) from Driver d")
-	public DriverValidationDTO findDriverUserNamePassword(String userName, String password);
+//	@Query("select new com.cabway.model.DriverValidationDTO(d.userName,d.password) from Driver d")
+//	public DriverValidationDTO findDriverUserNamePassword(String userName, String password);
 
 }
