@@ -11,44 +11,44 @@ import com.CabWalla.model.Cab;
 import com.CabWalla.model.Driver;
 import com.CabWalla.repository.DriverDAO;
 
-public class CabServicesImpl implements CabServices{
+public class CabServicesImpl implements CabServices {
 
 	@Autowired
 	private DriverDAO driverDao;
-	
+
 	@Override
 	public Cab updateCab(Cab cab) throws DriverException, LoginException {
-List<Driver> drivers = driverDao.findAll();
-		
+		List<Driver> drivers = driverDao.findAll();
+
 		boolean flag = false;
-		
-		for(Driver driver : drivers) {
-			if(driver.getCab().getCabId()==cab.getCabId()) {
+
+		for (Driver driver : drivers) {
+			if (driver.getCab().getCabId() == cab.getCabId()) {
 				Cab updateCab = driver.getCab();
 				updateCab.setCarType(cab.getCarType());
 				updateCab.setPerKmRate(cab.getPerKmRate());
 				flag = true;
-				
+
 				driverDao.save(driver);
 			}
 		}
-		if(!flag)
+		if (!flag)
 			throw new DriverException("No driver found having cab with id " + cab.getCabId());
-		
+
 		else
 			return cab;
 	}
 
 	@Override
 	public List<Cab> viewCabsOfType(String carType) throws DriverException, LoginException {
-List<Cab> cabs = new ArrayList<>();
-		
-		for(Driver driver : driverDao.findAll()) {
-			if(driver.getCab().getCarType().equalsIgnoreCase(carType)) {
+		List<Cab> cabs = new ArrayList<>();
+
+		for (Driver driver : driverDao.findAll()) {
+			if (driver.getCab().getCarType().equalsIgnoreCase(carType)) {
 				cabs.add(driver.getCab());
 			}
 		}
-		if(cabs.isEmpty())
+		if (cabs.isEmpty())
 			throw new DriverException("No driver has cab of type " + carType);
 		else
 			return cabs;
@@ -56,19 +56,18 @@ List<Cab> cabs = new ArrayList<>();
 
 	@Override
 	public int countCabsOfType(String carType) throws DriverException, LoginException {
-		
+
 		int count = 0;
-		
-		for(Driver driver : driverDao.findAll()) {
-			if(driver.getCab().getCarType().equalsIgnoreCase(carType)) {
+
+		for (Driver driver : driverDao.findAll()) {
+			if (driver.getCab().getCarType().equalsIgnoreCase(carType)) {
 				count++;
 			}
 		}
-		if(count==0)
+		if (count == 0)
 			throw new DriverException("No driver has cab of type " + carType);
 		else
 			return count;
-	}
 	}
 
 }
