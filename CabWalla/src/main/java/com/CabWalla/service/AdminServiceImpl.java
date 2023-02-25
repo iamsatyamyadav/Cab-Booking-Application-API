@@ -51,7 +51,7 @@ public class AdminServiceImpl implements AdminService{
 		Admin existingAdmin = aDao.findByUserName(admin.getUserName());
 
 		if (existingAdmin != null) {
-			throw new AdminException("Admin already present with username: " + admin.getUserName());
+			throw new AdminException("Admin already present with this Change the username: " + admin.getUserName());
 		} else {
 			Admin saveadmin = aDao.save(admin);
 			return saveadmin;
@@ -63,13 +63,13 @@ public class AdminServiceImpl implements AdminService{
 		CurrentSession adminLogin = csDao.findByUuid(key);
 
 		if (adminLogin == null) {
-			throw new AdminException("Please provide a valid key to update a Admin");
+			throw new AdminException("Please give valid ID for update. ");
 		}
 
 		if (admin.getAdminId() == adminLogin.getUserId()) {
 			return aDao.save(admin);
 		} else {
-			throw new AdminException("Invalid Admin details ,please login first");
+			throw new AdminException("Invalid Admin details ,please login first"); 
 		}
 	}
 
@@ -78,11 +78,11 @@ public class AdminServiceImpl implements AdminService{
 		CurrentSession adminLogin = csDao.findByUuid(key);
 
 		if (adminLogin == null) {
-			throw new AdminException("Please provide a valid key to delete a Admin");
+			throw new AdminException("Please give valid key. For deleted Admin. ");
 		}
 
 		if (adminId == adminLogin.getUserId()) {
-			Admin existingAdmin = aDao.findById(adminId).orElseThrow(() -> new AdminException("Admin not found"));
+			Admin existingAdmin = aDao.findById(adminId).orElseThrow(() -> new AdminException(" Not able to find admin details. "));
 			aDao.delete(existingAdmin);
 
 			return existingAdmin;
@@ -98,7 +98,7 @@ public class AdminServiceImpl implements AdminService{
 		if (adminLogin == null) {
 			throw new AdminException("Please provide a valid key to get all trips of customers");
 		} else {
-			List<TripBooking> customerTrips = tbDao.findAll();
+			List<TripBooking> customerTrips = tbDao.findAll(); 
 
 			if (customerTrips.size() > 0) {
 
@@ -131,7 +131,7 @@ public class AdminServiceImpl implements AdminService{
 
 			if (cabWiseTrips.size() == 0) {
 
-				throw new DriverException("No trips found for driver with cab " + cab.getCabId());
+				throw new DriverException("No trips found for driver with this cab " + cab.getCabId());
 
 			} else {
 				return cabWiseTrips;
@@ -234,7 +234,7 @@ public class AdminServiceImpl implements AdminService{
 				}
 				if (allTrips.size() == 0) {
 					throw new TripBookingException(
-							"No trips present found for staetdate: " + fromDate + " to ennDate: " + toDate);
+							"There is No trips present found for staetdate: " + fromDate + " to ennDate: " + toDate);
 				} else {
 					return allTrips;
 				}
