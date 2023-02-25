@@ -21,9 +21,8 @@ import com.CabWalla.model.Customer;
 import com.CabWalla.model.TripBooking;
 import com.CabWalla.repository.AdminDao;
 import com.CabWalla.repository.CurrentSessionDAO;
+import com.CabWalla.repository.CustomerDao;
 import com.CabWalla.repository.TripBookingDao;
-
-import lombok.CustomLog;
 
 
 
@@ -37,7 +36,7 @@ public class AdminServiceImpl implements AdminService{
 	private CurrentSessionDAO csDao;
 
 	@Autowired
-	private CustomLog cDao;
+	private CustomerDao cDao;
 
 	@Autowired
 	private TripBookingDao tbDao;
@@ -138,7 +137,6 @@ public class AdminServiceImpl implements AdminService{
 
 		}
 	}
-	}
 
 	@Override
 	public List<TripBooking> getTripsByCustomerId(Integer customerId, String key)
@@ -181,20 +179,17 @@ public class AdminServiceImpl implements AdminService{
 				Set<TripBooking> dateWiseTrips = new HashSet<>();
 
 				for (TripBooking tb : trips) {
-
-//					Instant instant1 = tb.getFromDateTime().atZone(ZoneId.systemDefault()).toInstant();
-//					Date startdate = Date.from(instant1);
 					
 					LocalDate startdate = tb.getFromDateTime().toLocalDate();
 					
-					if (startdate.equals(date)) {
+					if (startdate.equals(d)) {
 						dateWiseTrips.add(tb);
 					}
 
 				}
 
 				if (dateWiseTrips.size() == 0) {
-					throw new TripBookingException("No trips present found for date" + date);
+					throw new TripBookingException("No trips present found for date" + d);
 				} else {
 					return dateWiseTrips;
 				}

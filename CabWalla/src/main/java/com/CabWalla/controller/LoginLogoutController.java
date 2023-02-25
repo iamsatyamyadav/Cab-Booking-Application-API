@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.CabWalla.DTO.LoginDTO;
 import com.CabWalla.exception.LoginException;
-import com.CabWalla.model.LoginDTO;
 import com.CabWalla.service.LoginService;
 
 import jakarta.validation.Valid;
