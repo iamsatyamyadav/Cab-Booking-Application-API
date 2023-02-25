@@ -18,6 +18,7 @@ import com.CabWalla.exception.AdminException;
 import com.CabWalla.exception.CustomerException;
 import com.CabWalla.exception.DriverException;
 import com.CabWalla.exception.LoginException;
+import com.CabWalla.exception.TripBookingException;
 import com.CabWalla.model.Customer;
 import com.CabWalla.model.CustomerValidationDTO;
 import com.CabWalla.model.Driver;
@@ -78,7 +79,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/customers/tripBook/{cid}")
-	public ResponseEntity<TripBooking> insertTrip(@PathVariable("cid") Integer customerId ,@Valid @RequestBody TripBooking tripBook, @RequestParam String key) throws TripBookinException, LoginException{
+	public ResponseEntity<TripBooking> insertTrip(@PathVariable("cid") Integer customerId ,@Valid @RequestBody TripBooking tripBook, @RequestParam String key) throws TripBookingException, LoginException{
 		
 		TripBooking tripBook1 = tripbookService.insertTripBooking(tripBook, customerId, key);
 		
@@ -98,7 +99,7 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/customer/updateTripBooking/{userId}")
-	public ResponseEntity<TripBooking> updateTrip(@PathVariable("userId") Integer userId, @RequestParam String key,@Valid @RequestBody TripBooking tripBook) throws TripBookinException, LoginException, AdminException{
+	public ResponseEntity<TripBooking> updateTrip(@PathVariable("userId") Integer userId, @RequestParam String key,@Valid @RequestBody TripBooking tripBook) throws TripBookingException, LoginException, AdminException{
 		
 		TripBooking trip = tripbookService.updateTripBooking(tripBook, userId, key);
 		
@@ -107,7 +108,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/customer/tripbookings/{cid}")
-	public ResponseEntity<Set<TripBooking>> getAllTripsOfCustomers(@PathVariable("cid") Integer customerId,  @RequestParam String key) throws CustomerException, AdminException, TripBookinException, LoginException{
+	public ResponseEntity<Set<TripBooking>> getAllTripsOfCustomers(@PathVariable("cid") Integer customerId,  @RequestParam String key) throws CustomerException, AdminException, TripBookingException, LoginException{
 		
 		Set<TripBooking> customerTrips = tripbookService.viewAllTripsOfCustomerById(customerId, key);
 		
