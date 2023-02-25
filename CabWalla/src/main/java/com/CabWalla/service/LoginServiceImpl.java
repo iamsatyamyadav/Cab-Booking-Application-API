@@ -7,26 +7,26 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.CabWalla.DTO.LoginDTO;
 import com.CabWalla.exception.LoginException;
 import com.CabWalla.model.Admin;
 import com.CabWalla.model.CurrentSession;
 import com.CabWalla.model.Customer;
 import com.CabWalla.model.Driver;
-import com.CabWalla.model.LoginDTO;
 import com.CabWalla.repository.AdminDao;
-import com.CabWalla.repository.CurrentSessionDAO;
+import com.CabWalla.repository.CurrentSessionDao;
 import com.CabWalla.repository.CustomerDao;
-import com.CabWalla.repository.DriverDAO;
+import com.CabWalla.repository.DriverDao;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
 
 	@Autowired
-	private DriverDAO driverDAO;
+	private DriverDao driverDao;
 
 	@Autowired
-	private CurrentSessionDAO currentSessionDAO;
+	private CurrentSessionDao currentSessionDao;
 
 	@Autowired
 	private CustomerDao customerDao;
@@ -45,7 +45,7 @@ public class LoginServiceImpl implements LoginService {
 			if (existingCustomer == null)
 				throw new LoginException("Please enter a valid username ");
 
-			Optional<CurrentSession> validUserSessionOpt = currentSessionDAO.findById(existingCustomer.getCustomerId());
+			Optional<CurrentSession> validUserSessionOpt = currentSessionDao.findById(existingCustomer.getCustomerId());
 
 			if (validUserSessionOpt.isPresent()) {
 				throw new LoginException("User already logged in..");
@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
 
 			CurrentSession userSession = new CurrentSession(existingCustomer.getCustomerId(), key, LocalDateTime.now());
 
-			currentSessionDAO.save(userSession);
+			currentSessionDao.save(userSession);
 
 			return userSession.toString();
 
@@ -70,7 +70,7 @@ public class LoginServiceImpl implements LoginService {
 			if (existingAdmin == null)
 				throw new LoginException("Please enter a valid username ");
 
-			Optional<CurrentSession> validUserSessionOpt = currentSessionDAO.findById(existingAdmin.getAdminId());
+			Optional<CurrentSession> validUserSessionOpt = currentSessionDao.findById(existingAdmin.getAdminId());
 
 			if (validUserSessionOpt.isPresent()) {
 				throw new LoginException("User already logged in..");
@@ -86,18 +86,18 @@ public class LoginServiceImpl implements LoginService {
 
 			CurrentSession userSession = new CurrentSession(existingAdmin.getAdminId(), key, LocalDateTime.now());
 
-			currentSessionDAO.save(userSession);
+			currentSessionDao.save(userSession);
 
 			return userSession.toString();
 
 		} else if (type.equals("driver")) {
 
-			Driver existingDriver = driverDAO.findByUserName(dto.getUserName());
+			Driver existingDriver = driverDao.findByUserName(dto.getUserName());
 
 			if (existingDriver == null)
 				throw new LoginException("Please enter a valid username ");
 
-			Optional<CurrentSession> validUserSessionOpt = currentSessionDAO.findById(existingDriver.getDriverId());
+			Optional<CurrentSession> validUserSessionOpt = currentSessionDao.findById(existingDriver.getDriverId());
 
 			if (validUserSessionOpt.isPresent()) {
 				throw new LoginException("User already logged in..");
@@ -111,7 +111,7 @@ public class LoginServiceImpl implements LoginService {
 
 			CurrentSession userSession = new CurrentSession(existingDriver.getDriverId(), key, LocalDateTime.now());
 
-			currentSessionDAO.save(userSession);
+			currentSessionDao.save(userSession);
 
 			return userSession.toString();
 
@@ -124,13 +124,13 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public String logOutFromAccount(String key) throws LoginException {
-		CurrentSession vs = currentSessionDAO.findByUuid(key);
+		CurrentSession vs = currentSessionDao.findByUuid(key);
 		
 		if(vs==null) {
 			throw new LoginException("No user found with key " + key);
 		}else {
 			
-			currentSessionDAO.delete(vs);
+			currentSessionDao.delete(vs);
 			
 			return "Logged Out!";
 		}

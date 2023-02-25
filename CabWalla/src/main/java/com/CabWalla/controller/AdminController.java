@@ -35,7 +35,6 @@ import com.CabWalla.service.TripBookingService;
 import jakarta.validation.Valid;
 
 @RestController
-//@RequestMapping("/adminService")
 public class AdminController {
 
 	@Autowired

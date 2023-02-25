@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.CabWalla.DTO.CustomerValidationDTO;
 import com.CabWalla.exception.AdminException;
 import com.CabWalla.exception.CustomerException;
 import com.CabWalla.exception.DriverException;
 import com.CabWalla.exception.LoginException;
 import com.CabWalla.exception.TripBookingException;
 import com.CabWalla.model.Customer;
-import com.CabWalla.model.CustomerValidationDTO;
 import com.CabWalla.model.Driver;
 import com.CabWalla.model.TripBooking;
 import com.CabWalla.service.CustomerService;
@@ -91,7 +91,7 @@ public class CustomerController {
 	public ResponseEntity<Customer> validateCustomer(@Valid @RequestBody CustomerValidationDTO customerDto){
 		
 		String userName = customerDto.getUserName();
-		String password = customerDto.getPassword();
+		String password = customerDto.getPassword(); 
 		
 		Customer customer = customerService.validateCustomer(userName, password);
 		

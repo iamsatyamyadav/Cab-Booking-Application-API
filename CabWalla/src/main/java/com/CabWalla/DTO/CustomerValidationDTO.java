@@ -1,4 +1,4 @@
-package com.CabWalla.model;
+package com.CabWalla.DTO;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

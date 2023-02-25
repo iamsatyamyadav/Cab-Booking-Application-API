@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.CabWalla.DTO.CustomerValidationDTO;
 import com.CabWalla.model.Customer;
-import com.CabWalla.model.CustomerValidationDTO;
 
 @Repository
 public interface CustomerDao extends JpaRepository<Customer, Integer>{

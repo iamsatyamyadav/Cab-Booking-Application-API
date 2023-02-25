@@ -8,11 +8,11 @@ import com.CabWalla.DTO.DriverValidationDTO;
 import com.CabWalla.model.Driver;
 
 @Repository
-public interface DriverDAO extends JpaRepository<Driver, Integer>{
+public interface DriverDao extends JpaRepository<Driver, Integer>{
 
 	public Driver findByUserName(String userName);
 	
-	@Query("select new com.cabway.model.DriverValidationDTO(d.userName,d.password) from Driver d")
+	@Query("select new com.CabWalla.model.DriverValidationDTO(d.userName,d.password) from Driver d")
 	public DriverValidationDTO findDriverUserNamePassword(String userName, String password);
 
 }

@@ -12,16 +12,16 @@ import com.CabWalla.exception.LoginException;
 import com.CabWalla.model.CurrentSession;
 import com.CabWalla.model.Driver;
 import com.CabWalla.repository.AdminDao;
-import com.CabWalla.repository.CurrentSessionDAO;
-import com.CabWalla.repository.DriverDAO;
+import com.CabWalla.repository.CurrentSessionDao;
+import com.CabWalla.repository.DriverDao;
 
 @Service
 public class DriverServiceImpl implements DriverService {
 	@Autowired
-	private DriverDAO driverDao;
+	private DriverDao driverDao;
 
 	@Autowired
-	private CurrentSessionDAO currentSessionDao;
+	private CurrentSessionDao currentSessionDao;
 
 	@Autowired
 	private AdminDao adminDao;

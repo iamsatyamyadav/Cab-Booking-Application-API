@@ -24,8 +24,9 @@ import lombok.ToString;
 
 
 
-@Data
-
+//@Data
+@Getter
+@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,7 +38,7 @@ public class Driver extends AbstractUser{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer driverId;
 	
-	@NotNull
+//	@NotNull
 	@Column(unique = true)
 	private String licenseNo;
 

@@ -1,9 +1,11 @@
 package com.CabWalla.exception;
 
+
+
 public class TripBookingException extends Exception{
 
 	public TripBookingException() {
-		super();
+		
 		// TODO Auto-generated constructor stub
 	}
 

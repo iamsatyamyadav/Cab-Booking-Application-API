@@ -28,7 +28,7 @@ public class TripBooking {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer tripBookingId;
 	
-	private Integer customerId;
+//	private Integer customerId;
 	
 	@ManyToOne
 	private Customer customer;

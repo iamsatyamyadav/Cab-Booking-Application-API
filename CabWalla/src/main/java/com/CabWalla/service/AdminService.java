@@ -24,7 +24,6 @@ public interface AdminService {
 	
 	public List<TripBooking> getTripsCabwise(Cab cab, String key) throws DriverException, AdminException;
 	
-	
 	public List<TripBooking> getTripsByCustomerId(Integer customerId,String key)throws CustomerException,TripBookingException,AdminException;
 	
 	public Set<TripBooking> getTripsDatewise(LocalDate d,String key)throws CustomerException,TripBookingException,AdminException;

@@ -4,22 +4,25 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.CabWalla.DTO.CustomerValidationDTO;
 import com.CabWalla.exception.CustomerException;
 import com.CabWalla.exception.LoginException;
 import com.CabWalla.model.CurrentSession;
 import com.CabWalla.model.Customer;
-import com.CabWalla.model.CustomerValidationDTO;
 import com.CabWalla.repository.AdminDao;
-import com.CabWalla.repository.CurrentSessionDAO;
+import com.CabWalla.repository.CurrentSessionDao;
 import com.CabWalla.repository.CustomerDao;
 
+
+@Service
 public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	private CustomerDao customerDao;
 	
 	@Autowired
-	private CurrentSessionDAO sessionDao; 
+	private CurrentSessionDao sessionDao; 
 	
 	@Autowired
 	private AdminDao adminDao;

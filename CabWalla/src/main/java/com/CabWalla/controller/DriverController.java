@@ -28,10 +28,8 @@ import com.CabWalla.service.TripBookingService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/d")
 public class DriverController {
 	
-
 	@Autowired
 	private TripBookingService tbService;
 	

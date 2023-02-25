@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.CabWalla.exception.DriverException;
 import com.CabWalla.exception.LoginException;
 import com.CabWalla.model.Cab;
 import com.CabWalla.model.Driver;
-import com.CabWalla.repository.DriverDAO;
+import com.CabWalla.repository.DriverDao;
 
+
+@Service
 public class CabServicesImpl implements CabServices {
 
 	@Autowired
-	private DriverDAO driverDao;
+	private DriverDao driverDao;
 
 	@Override
 	public Cab updateCab(Cab cab) throws DriverException, LoginException {
