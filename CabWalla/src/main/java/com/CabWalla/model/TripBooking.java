@@ -48,9 +48,9 @@ public class TripBooking {
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", shape = JsonFormat.Shape.STRING)
 	private LocalDateTime toDateTime;
 	
-	private boolean status;
+	private String status;
 	
-//	@NotNull(message = "This field cannot be null")
+//	@NotNull(message = "This field cannot be empty")
 	private Float distanceInKm;
 	
 	private Float bill;
