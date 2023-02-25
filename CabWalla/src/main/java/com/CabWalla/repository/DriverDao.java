@@ -4,15 +4,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.CabWalla.DTO.DriverValidationDTO;
 import com.CabWalla.model.Driver;
+import com.CabWalla.model.DriverValidationDTO;
 
 @Repository
 public interface DriverDao extends JpaRepository<Driver, Integer>{
 
 	public Driver findByUserName(String userName);
 	
-	@Query("select new com.CabWalla.model.DriverValidationDTO(d.userName,d.password) from Driver d")
+//	@Query("select new com.CabWalla.model.DriverValidationDTO(d.userName,d.password) from Driver d")
 	public DriverValidationDTO findDriverUserNamePassword(String userName, String password);
 
 }

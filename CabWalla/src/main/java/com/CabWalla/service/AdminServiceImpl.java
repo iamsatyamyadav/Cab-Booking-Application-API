@@ -19,7 +19,7 @@ import com.CabWalla.model.CurrentSession;
 import com.CabWalla.model.Customer;
 import com.CabWalla.model.TripBooking;
 import com.CabWalla.repository.AdminDao;
-import com.CabWalla.repository.CurrentSessionDAO;
+import com.CabWalla.repository.CurrentSessionDao;
 import com.CabWalla.repository.CustomerDao;
 import com.CabWalla.repository.TripBookingDao;
 
@@ -32,7 +32,7 @@ public class AdminServiceImpl implements AdminService{
 	private AdminDao aDao;
 
 	@Autowired
-	private CurrentSessionDAO csDao;
+	private CurrentSessionDao csDao;
 
 	@Autowired
 	private CustomerDao cDao;
@@ -135,7 +135,7 @@ public class AdminServiceImpl implements AdminService{
 
 		}
 	}
-	}
+
 
 	@Override
 	public List<TripBooking> getTripsByCustomerId(Integer customerId, String key)

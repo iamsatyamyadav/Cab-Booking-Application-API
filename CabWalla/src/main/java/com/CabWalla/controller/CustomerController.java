@@ -2,6 +2,8 @@ package com.CabWalla.controller;
 
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,20 +16,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CabWalla.DTO.CustomerValidationDTO;
 import com.CabWalla.exception.AdminException;
 import com.CabWalla.exception.CustomerException;
 import com.CabWalla.exception.DriverException;
 import com.CabWalla.exception.LoginException;
 import com.CabWalla.exception.TripBookingException;
 import com.CabWalla.model.Customer;
+import com.CabWalla.model.CustomerValidationDTO;
 import com.CabWalla.model.Driver;
 import com.CabWalla.model.TripBooking;
 import com.CabWalla.service.CustomerService;
 import com.CabWalla.service.DriverService;
 import com.CabWalla.service.TripBookingService;
-
-import jakarta.validation.Valid;
 
 @RestController
 public class CustomerController {
