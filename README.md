@@ -27,8 +27,32 @@
   * swagger-ui 
   * java
   
+  # Tools
   
-# Features
+ * IDE :- STS.
+ * Communication :- Slack.
+ * Code Management and Deployment :- Git & GitHub.
+  
+  
+  
+  
+  
+# Features & Controller
+## Driver-Controller
+![image](https://user-images.githubusercontent.com/103804433/221413489-1fd2861c-a5cb-4637-9a33-f4a390395e95.png)
+
+## Customer-Controller
+
+![image](https://user-images.githubusercontent.com/103804433/221413514-514deac0-959d-48f7-8153-7394b3bbe4dc.png)
+
+
+## Admin-Controller
+![image](https://user-images.githubusercontent.com/103804433/221413530-a8e99dc6-0e96-454b-931f-ee09b9ee4f89.png)
+
+## Login-Logout-Controller
+![image](https://user-images.githubusercontent.com/103804433/221413540-46a40d1f-428e-46f8-abac-483dc1f3790a.png)
+
+
 <h3> Admin functionalities </h3>
 
 
