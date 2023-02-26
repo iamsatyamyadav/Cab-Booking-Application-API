@@ -10,8 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -55,6 +58,12 @@ public class Driver extends AbstractUser{
 		this.rating = rating;
 	}
 
+	@Override
+	public String toString() {
+		return "Driver [driverId=" + driverId + ", licenseNo=" + licenseNo + ", rating=" + rating + ", cab=" + cab
+				+ ", tripBookings=" + tripBookings + "]";
+	}
+
 	public Integer getDriverId() {
 		return driverId;
 	}
@@ -95,12 +104,6 @@ public class Driver extends AbstractUser{
 		this.tripBookings = tripBookings;
 	}
 
-	@Override
-	public String toString() {
-		return "Driver [driverId=" + driverId + ", licenseNo=" + licenseNo + ", rating=" + rating + ", cab=" + cab
-				+ ", tripBookings=" + tripBookings + "]";
-	}
-
 	public Driver(Integer driverId, String licenseNo,
 			@Max(value = 5, message = "Rating must be <= 5") @Min(value = 0, message = "Rating must be more than 0") Float rating,
 			Cab cab, Set<TripBooking> tripBookings) {
@@ -114,7 +117,17 @@ public class Driver extends AbstractUser{
 
 	public Driver() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+
+	public Driver(@Size(max = 15, min = 3) String userName,
+			@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,12}$", message = "Password should be alphanumeric and must contain 6-12 characters having at least one special character, one upper case, one lowercase, and one digit") String password,
+			String address, @Pattern(regexp = "^[789]\\d{9}$") String mobileNo, @Email String email) {
+		super(userName, password, address, mobileNo, email);
+
+
+	}
+
 	
 	
 	

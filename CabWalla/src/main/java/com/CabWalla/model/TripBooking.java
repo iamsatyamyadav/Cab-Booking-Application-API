@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
-
 @Entity
 public class TripBooking {
 
@@ -139,7 +138,7 @@ public class TripBooking {
 
 	public TripBooking() {
 		super();
-	}
+   }
 
 	@Override
 	public String toString() {
@@ -148,6 +147,9 @@ public class TripBooking {
 				+ ", toDateTime=" + toDateTime + ", status=" + status + ", distanceInKm=" + distanceInKm + ", bill="
 				+ bill + "]";
 	}
+
+
+	
 	
 	
 }

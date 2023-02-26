@@ -51,12 +51,7 @@ public class CurrentSession {
 
 	public CurrentSession() {
 		super();
-	}
 
-	@Override
-	public String toString() {
-		return "CurrentSession [userId=" + userId + ", uuid=" + uuid + ", time=" + time + "]";
-	}
 	
-	
+		}
 }

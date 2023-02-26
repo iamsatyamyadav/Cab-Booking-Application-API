@@ -6,7 +6,6 @@ public class Cab {
 	private Integer cabId;
 	private String carType;
 	private Float perKmRate;
-	
 	public Integer getCabId() {
 		return cabId;
 	}
@@ -25,6 +24,10 @@ public class Cab {
 	public void setPerKmRate(Float perKmRate) {
 		this.perKmRate = perKmRate;
 	}
+	@Override
+	public String toString() {
+		return "Cab [cabId=" + cabId + ", carType=" + carType + ", perKmRate=" + perKmRate + "]";
+	}
 	public Cab(Integer cabId, String carType, Float perKmRate) {
 		super();
 		this.cabId = cabId;
@@ -33,10 +36,7 @@ public class Cab {
 	}
 	public Cab() {
 		super();
-	}
-	@Override
-	public String toString() {
-		return "Cab [cabId=" + cabId + ", carType=" + carType + ", perKmRate=" + perKmRate + "]";
+		// TODO Auto-generated constructor stub
 	}
 	
 	
