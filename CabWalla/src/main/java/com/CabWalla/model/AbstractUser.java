@@ -82,7 +82,6 @@ public abstract class AbstractUser {
 		this.email = email;
 	}
 
-
 	@Override
 	public String toString() {
 		return "AbstractUser [userName=" + userName + ", password=" + password + ", address=" + address + ", mobileNo="

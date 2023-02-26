@@ -30,15 +30,20 @@ public class Admin extends AbstractUser{
 		this.adminId = adminId;
 	}
 
+	public Admin(Integer adminId) {
+		super();
+		this.adminId = adminId;
+	}
 
 	@Override
-	public String toString(){
+	public String toString() {
 		return "Admin [adminId=" + adminId + "]";
 	}
 
-
+	public Admin() {
+		super();
+	}
 
 	
-
 	
 }
