@@ -34,8 +34,13 @@
  * Code Management and Deployment :- Git & GitHub.
   
   
+  ## API Root Endpoint
+
+`https://localhost:8081/`
+
+`http://localhost:8081/swagger-ui/index.html#/`
   
-  
+
   
 # Features & Controller
 ## Driver-Controller
