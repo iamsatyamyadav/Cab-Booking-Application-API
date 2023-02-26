@@ -1,5 +1,7 @@
 package com.CabWalla.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,22 +26,20 @@ import com.CabWalla.service.CabServices;
 import com.CabWalla.service.DriverService;
 import com.CabWalla.service.TripBookingService;
 
-import jakarta.validation.Valid;
-
 @RestController
 public class DriverController {
 	
 	@Autowired
-	private TripBookingService tbService;
+	private TripBookingService tripBookingService;
 	
 	@Autowired
-	private CabServices cabService;
+	private CabServices cabServices;
 	
 	@Autowired
 	private DriverService driverService;
 
-	@PostMapping("/driver")
-	public ResponseEntity<Driver> registerDriver(@Valid @RequestBody Driver driver){
+	@PostMapping("/adddriver")
+	public ResponseEntity<Driver> addDriver(@Valid @RequestBody Driver driver){
 		
 		Driver saved  = driverService.insertDriver(driver);
 		
@@ -56,8 +55,8 @@ public class DriverController {
 		
 	}
 	
-	@DeleteMapping("/deleteDriver/{driverId}")
-	public ResponseEntity<Driver> deleteDriver(@PathVariable("driverId") Integer driverId, @RequestParam String key) throws DriverException{
+	@DeleteMapping("/deleteDriver/{did}")
+	public ResponseEntity<Driver> deleteDriver(@PathVariable("did") Integer driverId, @RequestParam String key) throws DriverException{
 		
 		Driver deletedDriver = driverService.deleteDriver(driverId, key);
 		
@@ -65,18 +64,18 @@ public class DriverController {
 		
 	}
 	
-	@GetMapping("/driver/{driverId}")
-	public ResponseEntity<Driver> viewDriver(@PathVariable("driverId") Integer driverId, @RequestParam String key) throws DriverException, LoginException{
+	@GetMapping("/viewdriver/{did}")
+	public ResponseEntity<Driver> viewDriver(@PathVariable("did") Integer driverId, @RequestParam String key) throws DriverException, LoginException{
 		
 		Driver viewdriver = driverService.viewDriver(driverId, key);
 		
 		return new ResponseEntity<Driver>(viewdriver, HttpStatus.OK);
 		
 	}
-	@PutMapping("/driver/updateTripBooking/{userId}")
+	@PutMapping("/driver/updateTrip/{userId}")
 	public ResponseEntity<TripBooking> updateTrip(@PathVariable("userId") Integer userId, @RequestParam String key,@Valid @RequestBody TripBooking tripBook) throws TripBookingException, LoginException, AdminException{
 		
-		TripBooking trip = tbService.updateTripBooking(tripBook, userId, key);
+		TripBooking trip = tripBookingService.updateTripBooking(tripBook, userId, key);
 		
 		return new ResponseEntity<TripBooking>(trip, HttpStatus.ACCEPTED);
 		
@@ -86,16 +85,16 @@ public class DriverController {
 	@PutMapping("/drivers/updateCab")
 	public ResponseEntity<Cab> updateCab(@Valid @RequestBody Cab cab, @RequestParam String key) throws DriverException, LoginException{
 		
-		Cab updatedCab = cabService.updateCab(cab);
+		Cab updatedCab = cabServices.updateCab(cab);
 		
 		return new ResponseEntity<Cab>(updatedCab, HttpStatus.ACCEPTED);
 	}
 
 	
-	@PutMapping("/driver/tripbooking/bill/{customerid}")
-	public ResponseEntity<TripBooking> calculateBillHandler(@PathVariable("customerid") Integer customerid, @RequestParam String key) throws DriverException, LoginException, CustomerException, TripBookingException, AdminException{
+	@PutMapping("/driver/trip/bill/{cid}")
+	public ResponseEntity<TripBooking> calculateBill(@PathVariable("cid") Integer customerid, @RequestParam String key) throws DriverException, LoginException, CustomerException, TripBookingException, AdminException{
 		
-		TripBooking trip = tbService.calculateBill(customerid, key);
+		TripBooking trip = tripBookingService.calculateBill(customerid, key);
 		
 		return new ResponseEntity<TripBooking>(trip, HttpStatus.OK);
 		

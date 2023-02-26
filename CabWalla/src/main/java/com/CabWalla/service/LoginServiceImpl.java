@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.CabWalla.DTO.LoginDTO;
+import com.CabWalla.dto.LoginDTO;
 import com.CabWalla.exception.LoginException;
 import com.CabWalla.model.Admin;
 import com.CabWalla.model.CurrentSession;

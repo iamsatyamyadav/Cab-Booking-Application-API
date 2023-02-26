@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,58 +34,55 @@ import com.CabWalla.service.CustomerService;
 import com.CabWalla.service.DriverService;
 import com.CabWalla.service.TripBookingService;
 
-import jakarta.validation.Valid;
-
 @RestController
 public class AdminController {
 
 	@Autowired
-	private AdminService aService;
+	private AdminService adminService;
 	
 	@Autowired
 	private CustomerService customerService;
 	
 	@Autowired
-	private TripBookingService tbService;
+	private TripBookingService tripBookingService;
 	
-
 	
 	@Autowired
-	private CabServices cabService;
+	private CabServices cabServices;
 
 	@Autowired
 	private DriverService driverService;
 
 
 
-	@PostMapping("/admins")
-	public ResponseEntity<Admin> insertAdmin(@Valid @RequestBody Admin admin) throws AdminException {
+	@PostMapping("/addAdmins")
+	public ResponseEntity<Admin> addAdmin(@Valid @RequestBody Admin admin) throws AdminException {
 
-		Admin ad = aService.insertAdmin(admin);
+		Admin ad = adminService.insertAdmin(admin);
 
 		return new ResponseEntity<Admin>(ad, HttpStatus.ACCEPTED);
 
 	}
 
-	@PutMapping("/admins")
-	public ResponseEntity<Admin> updatedAdmin(@Valid @RequestBody Admin admin ,@RequestParam String key) throws AdminException {
+	@PutMapping("/updateAdmins")
+	public ResponseEntity<Admin> updateAdmin(@Valid @RequestBody Admin admin ,@RequestParam String key) throws AdminException {
 
-		Admin ad = aService.updateAdminDetails(admin, key);
+		Admin ad = adminService.updateAdminDetails(admin, key);
 
 		return new ResponseEntity<Admin>(ad, HttpStatus.ACCEPTED);
 
 	}
 	
-	@DeleteMapping("/admins/{aid}")
-	public ResponseEntity<Admin> deletedAdmin(@PathVariable("aid") Integer adminId,@RequestParam String key) throws AdminException {
+	@DeleteMapping("/deleteAdmins/{aid}")
+	public ResponseEntity<Admin> deleteAdmin(@PathVariable("aid") Integer adminId,@RequestParam String key) throws AdminException {
 
-		Admin ad = aService.deleteAdminDetails(adminId, key);
+		Admin ad = adminService.deleteAdminDetails(adminId, key);
 
 		return new ResponseEntity<Admin>(ad, HttpStatus.ACCEPTED);
 
 	}
 
-	@GetMapping("/admins/customers")
+	@GetMapping("/admins/getAllcustomers")
 	public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam String key) throws CustomerException, LoginException{
 		
 		List<Customer> customers = customerService.getAllCustomers(key);
@@ -92,7 +91,7 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/admins/customer/{cid}")
+	@GetMapping("/admins/customerbyid/{cid}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable("cid") Integer customerId, @RequestParam String key) throws CustomerException, LoginException{
 		
 		Customer customer = customerService.getCustomerById(customerId, key);
@@ -101,60 +100,60 @@ public class AdminController {
 		
 	}
 	
-	@DeleteMapping("/admins/deletetripBooking/{tbid}/{uid}")
-	public ResponseEntity<TripBooking> deletetripBooking(@PathVariable("tbid") Integer tbid,@PathVariable("uid") Integer uid,@RequestParam String key) throws TripBookingException, LoginException, AdminException{
+	@DeleteMapping("/admins/deletetrip/{tbid}/{uid}")
+	public ResponseEntity<TripBooking> deletetrip(@PathVariable("tbid") Integer tbid,@PathVariable("uid") Integer uid,@RequestParam String key) throws TripBookingException, LoginException, AdminException{
 		
-		TripBooking tBooking = tbService.deleteTripBooking(tbid, uid, key);
+		TripBooking tBooking = tripBookingService.deleteTripBooking(tbid, uid, key);
 		
 		
 		return new ResponseEntity<TripBooking>(tBooking, HttpStatus.ACCEPTED);
 	}
 
-	@PutMapping("/admin/updateTripBooking/{userId}")
+	@PutMapping("/admin/updateTrip/{userId}")
 	public ResponseEntity<TripBooking> updateTrip(@PathVariable("userId") Integer userId, @RequestParam String key, @Valid @RequestBody TripBooking tripBook) throws TripBookingException, LoginException, AdminException{
 		
-		TripBooking trip = tbService.updateTripBooking(tripBook, userId, key);
+		TripBooking trip = tripBookingService.updateTripBooking(tripBook, userId, key);
 		
 		return new ResponseEntity<TripBooking>(trip, HttpStatus.ACCEPTED);
 		
 	}
 	
-	@GetMapping("/admins/customers/tripbookings")
+	@GetMapping("/admins/customers/getalltrip")
 	public ResponseEntity<List<TripBooking>> getAllTrips(@RequestParam String key) throws CustomerException, AdminException{
 		
-		List<TripBooking> customersTrips = aService.getAllTrips(key);
+		List<TripBooking> customersTrips = adminService.getAllTrips(key);
 		
 		
 		return new ResponseEntity<List<TripBooking>>(customersTrips, HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/admins/customer/tripbookings/{cid}")
+	@GetMapping("/admins/customer/getalltripofcustomer/{cid}")
 	public ResponseEntity<List<TripBooking>> getAllTripsOfCustomers(@PathVariable("cid") Integer customerId,  @RequestParam String key) throws CustomerException, AdminException, TripBookingException, LoginException{
 		
-		List<TripBooking> customerTrips = aService.getTripsByCustomerId(customerId, key);
+		List<TripBooking> customerTrips = adminService.getTripsByCustomerId(customerId, key);
 		
 		
 		return new ResponseEntity<List<TripBooking>>(customerTrips, HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/admins/tripbookings/datewise/{date}")
+	@GetMapping("/admins/getTrip/bydate/{date}")
 	public ResponseEntity<Set<TripBooking>> getTripsDateWise(@PathVariable("date") String date, String key) throws CustomerException, TripBookingException, AdminException{
 		
 		LocalDate d = LocalDate.parse(date);
 		
-		Set<TripBooking> tripsByDate = aService.getTripsDatewise(d, key);
+		Set<TripBooking> tripsByDate = adminService.getTripsDatewise(d, key);
 		
 		return new ResponseEntity<Set<TripBooking>>(tripsByDate, HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/admins/tripbookings/datewise/{cid}/{sdate}/{edate}")
+	@GetMapping("/admins/getTrip/byday/{cid}/{sdate}/{edate}")
 	public ResponseEntity<Set<TripBooking>> getAllTripsForDays(@PathVariable("cid") Integer customerId, @PathVariable("sdate") String sdate, @PathVariable("edate") String edate,String key) throws CustomerException, TripBookingException, AdminException{
 		
 		LocalDate startDate = LocalDate.parse(sdate);
 		
 		LocalDate endDate = LocalDate.parse(edate);
 		
-		Set<TripBooking> tripsByDate = aService.getAllTripsForDays(customerId, startDate, endDate, key);
+		Set<TripBooking> tripsByDate = adminService.getAllTripsForDays(customerId, startDate, endDate, key);
 				
 		
 		return new ResponseEntity<Set<TripBooking>>(tripsByDate, HttpStatus.ACCEPTED);
@@ -172,10 +171,10 @@ public class AdminController {
 	
 	
 	
-	@PutMapping("/admins/tripbooking/bill/{cid}")
-	public ResponseEntity<TripBooking> generateBill(@PathVariable("cid") Integer customerId, @RequestParam String key) throws CustomerException, TripBookingException, LoginException, AdminException{
+	@PutMapping("/admins/trip/getbill/{cid}")
+	public ResponseEntity<TripBooking> getBill(@PathVariable("cid") Integer customerId, @RequestParam String key) throws CustomerException, TripBookingException, LoginException, AdminException{
 		
-		TripBooking trip = tbService.calculateBill(customerId, key);
+		TripBooking trip = tripBookingService.calculateBill(customerId, key);
 		
 		return new ResponseEntity<TripBooking>(trip, HttpStatus.ACCEPTED);
 		
@@ -185,7 +184,7 @@ public class AdminController {
 	@GetMapping("/admins/viewCabByType/{carType}")
 	public ResponseEntity<List<Cab>> viewCabsOfType(@PathVariable("carType") String carType, @RequestParam String key) throws DriverException, LoginException{
 		
-		List<Cab> cabs = cabService.viewCabsOfType(carType);
+		List<Cab> cabs = cabServices.viewCabsOfType(carType);
 		
 		return new ResponseEntity<List<Cab>>(cabs,HttpStatus.OK);
 		
@@ -194,7 +193,7 @@ public class AdminController {
 	@GetMapping("/admins/countCabsOfType/{carType}")
 	public ResponseEntity<Integer> countCabsOfType(@PathVariable("carType") String carType, @RequestParam String key) throws DriverException, LoginException{
 		
-		Integer count = cabService.countCabsOfType(carType);
+		Integer count = cabServices.countCabsOfType(carType);
 		
 		return new ResponseEntity<Integer>(count,HttpStatus.OK);
 	}

@@ -2,6 +2,8 @@ package com.CabWalla.controller;
 
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CabWalla.DTO.CustomerValidationDTO;
+import com.CabWalla.dto.CustomerValidationDTO;
 import com.CabWalla.exception.AdminException;
 import com.CabWalla.exception.CustomerException;
 import com.CabWalla.exception.DriverException;
@@ -27,13 +29,11 @@ import com.CabWalla.service.CustomerService;
 import com.CabWalla.service.DriverService;
 import com.CabWalla.service.TripBookingService;
 
-import jakarta.validation.Valid;
-
 @RestController
 public class CustomerController {
 
 	@Autowired
-	CustomerService customerService;
+	private CustomerService customerService;
 	
 	@Autowired
 	private TripBookingService tripbookService;
@@ -41,8 +41,8 @@ public class CustomerController {
 	@Autowired
 	private DriverService driverService;
 	
-	@PostMapping("/customer")
-	public ResponseEntity<Customer> registerCustomer(@Valid @RequestBody Customer customer){
+	@PostMapping("/addCustomer")
+	public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer customer){
 		
 		Customer registeredCustomer  = customerService.insertCustomer(customer);
 		
@@ -58,8 +58,8 @@ public class CustomerController {
 		
 	}
 	
-	@DeleteMapping("/deleteCustomer/{customerId}")
-	public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerId") Integer customerId, @RequestParam String key) throws CustomerException, LoginException{
+	@DeleteMapping("/deleteCustomer/{cid}")
+	public ResponseEntity<Customer> deleteCustomer(@PathVariable("cid") Integer customerId, @RequestParam String key) throws CustomerException, LoginException{
 		
 		Customer deletedCustomer = customerService.deleteCustomer(customerId, key);
 		
@@ -69,8 +69,8 @@ public class CustomerController {
 	
 
 	
-	@GetMapping("/customers/{customerId}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable("customerId") Integer customerId, @RequestParam String key) throws CustomerException, LoginException{
+	@GetMapping("/customers/{cid}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable("cid") Integer customerId, @RequestParam String key) throws CustomerException, LoginException{
 		
 		Customer customer = customerService.getCustomerById(customerId, key);
 		
@@ -78,8 +78,8 @@ public class CustomerController {
 		
 	}
 	
-	@PostMapping("/customers/tripBook/{cid}")
-	public ResponseEntity<TripBooking> insertTrip(@PathVariable("cid") Integer customerId ,@Valid @RequestBody TripBooking tripBook, @RequestParam String key) throws TripBookingException, LoginException{
+	@PostMapping("/customers/booktrip/{cid}")
+	public ResponseEntity<TripBooking> bookTrip(@PathVariable("cid") Integer customerId ,@Valid @RequestBody TripBooking tripBook, @RequestParam String key) throws TripBookingException, LoginException{
 		
 		TripBooking tripBook1 = tripbookService.insertTripBooking(tripBook, customerId, key);
 		
@@ -98,7 +98,7 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 	
-	@PutMapping("/customer/updateTripBooking/{userId}")
+	@PutMapping("/customer/updateTrip/{userId}")
 	public ResponseEntity<TripBooking> updateTrip(@PathVariable("userId") Integer userId, @RequestParam String key,@Valid @RequestBody TripBooking tripBook) throws TripBookingException, LoginException, AdminException{
 		
 		TripBooking trip = tripbookService.updateTripBooking(tripBook, userId, key);
@@ -107,7 +107,7 @@ public class CustomerController {
 		
 	}
 	
-	@GetMapping("/customer/tripbookings/{cid}")
+	@GetMapping("/customer/tripbycustomer/{cid}")
 	public ResponseEntity<Set<TripBooking>> getAllTripsOfCustomers(@PathVariable("cid") Integer customerId,  @RequestParam String key) throws CustomerException, AdminException, TripBookingException, LoginException{
 		
 		Set<TripBooking> customerTrips = tripbookService.viewAllTripsOfCustomerById(customerId, key);

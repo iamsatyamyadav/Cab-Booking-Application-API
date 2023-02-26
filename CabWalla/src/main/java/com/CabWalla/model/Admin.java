@@ -1,22 +1,11 @@
 package com.CabWalla.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
-//@Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 public class Admin extends AbstractUser{
 
@@ -32,7 +21,29 @@ public class Admin extends AbstractUser{
 	public Admin(String userName, String password, String address, String mobileNo, String email) {
 		super(userName, password, address, mobileNo, email);
 	}
-	
+
+	public Integer getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
+
+	public Admin(Integer adminId) {
+		super();
+		this.adminId = adminId;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [adminId=" + adminId + "]";
+	}
+
+	public Admin() {
+		super();
+	}
+
 	
 	
 }
