@@ -9,10 +9,11 @@
   <img src="https://user-images.githubusercontent.com/103804433/220417729-47e84cac-61a4-4912-a86e-ecc0ad7af7f6.png" width="25%" height = "200px"/>
 </div>
 
-ER_Diagram
+# ER_Diagram
 
 ![image](https://user-images.githubusercontent.com/103804433/221504892-9dc9058e-662d-4b49-8fe3-1d442cc064dd.png)
 
+# 
 
  * This project is an online cab booking system, designed to make it easier for customers to book a cab, as well as for drivers to manage their trips.
 
