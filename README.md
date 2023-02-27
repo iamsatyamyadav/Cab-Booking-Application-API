@@ -1,6 +1,4 @@
 # REST API for Online Cab Booking System
-# elegant-yam-358-
-API for Online Cab Booking Application.
 
 # Project Name :- CabWalla
 
