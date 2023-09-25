@@ -1,4 +1,4 @@
-# <div align="center"> Cab Booking Portal (CabWalla) </div>
+# <div align="center"> Cab-Booking-Application-API (CabWalla) </div>
  This application is a REST API for an Online Cab Booking Management System.Using this web service a customer can book a trip, an admin can assign a driver to a particular trip, and a driver can complete the trip. All these CRUD operations require validation on each step.
 
 # <div align="center"> 💻 Tech Stack </div>
